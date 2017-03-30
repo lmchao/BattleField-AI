@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2016, Ing. Gabriel Barrera <gmbarrera@gmail.com>
+ * Copyright (c) 2012-2017, Ing. Gabriel Barrera <gmbarrera@gmail.com>
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above 
@@ -16,6 +16,8 @@
 
 package ia.battle.core;
 
+import ia.battle.core.abilities.Ability;
+import ia.battle.core.abilities.StealthAbility;
 import ia.battle.core.actions.Action;
 import ia.battle.core.actions.Attack;
 import ia.battle.core.actions.BuildWall;
@@ -35,6 +37,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 //TODO: Mines and enemy flags
 
@@ -114,16 +117,25 @@ public class BattleField {
 	 * @return
 	 */
 	public WarriorData getEnemyData() {
-
 		WarriorData enemyData;
+		Warrior enemyWarrior;
 
-		if (currentWarriorWrapper == warriorWrapper1)
-			enemyData = new WarriorData(warriorWrapper2.getWarrior().getPosition(), warriorWrapper2.getWarrior().getHealth(), warriorWrapper2
-					.getWarrior().getName(), isWarriorInRange(warriorWrapper2.getWarrior()), wm1.getCount());
+		if (currentWarriorWrapper == warriorWrapper1) 
+			enemyWarrior = warriorWrapper2.getWarrior();
 		else
-			enemyData = new WarriorData(warriorWrapper1.getWarrior().getPosition(), warriorWrapper1.getWarrior().getHealth(), warriorWrapper1
-					.getWarrior().getName(), isWarriorInRange(warriorWrapper1.getWarrior()), wm2.getCount());
-
+			enemyWarrior = warriorWrapper1.getWarrior();
+		
+		FieldCell position = enemyWarrior.getPosition();
+		
+		StealthAbility ab = Ability.getStealthAbility(enemyWarrior);
+		if (ab != null)
+			position = ab.getStealthPosition();
+		
+		enemyData = new WarriorData(position, enemyWarrior.getHealth(), enemyWarrior.getName(), 
+				isWarriorInRange(enemyWarrior), enemyWarrior.getWarriorManager().getCount());
+		
+		warriorWrapper2.getWarrior().getAbilities();
+		
 		return enemyData;
 	}
 

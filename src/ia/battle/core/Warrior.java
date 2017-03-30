@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2015, Ing. Gabriel Barrera <gmbarrera@gmail.com>
+ * Copyright (c) 2012-2017, Ing. Gabriel Barrera <gmbarrera@gmail.com>
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above 
@@ -16,6 +16,9 @@
 
 package ia.battle.core;
 
+import java.util.ArrayList;
+
+import ia.battle.core.abilities.Ability;
 import ia.battle.core.actions.Action;
 import ia.exceptions.RuleException;
 
@@ -25,6 +28,7 @@ public abstract class Warrior {
 	private int health, defense, strength, speed, range;
 	private int initialHealth, initialDefense, initialStrength, initialSpeed, initialRange;
 	private WarriorManager warriorManager;
+	private ArrayList<Ability> abilities;
 
 	public final int getInitialHealth() {
 		return initialHealth;
@@ -58,6 +62,8 @@ public abstract class Warrior {
 
 	public Warrior(String name, int health, int defense, int strength, int speed, int range) throws RuleException {
 
+		this.abilities = new ArrayList<Ability>();
+		
 		this.name = name;
 
 		this.health = health;
@@ -138,6 +144,10 @@ public abstract class Warrior {
 		this.position = position;
 	}
 
+	public ArrayList<Ability> getAbilities() {
+		return this.abilities;
+	}
+	
 	public abstract Action playTurn(long tick, int actionNumber);
 
 	public abstract void wasAttacked(int damage, FieldCell source);
