@@ -16,15 +16,11 @@
 
 package ia.battle.core;
 
-public interface BattleFieldListener {
+public interface GeneralListener extends TimerListener {
     
     public void startFight();
     
     public void figthFinished(WarriorManager winner);
-    
-    public void tickLapsed(long tick);
-    
-    public void turnLapsed(long tick, int turnNumber, Warrior warrior);
     
     public boolean continueFighting();
     

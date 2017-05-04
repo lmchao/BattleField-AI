@@ -16,7 +16,7 @@
 
 package ia.battle.core;
 
-class WarriorWrapper extends Attackable {
+public class WarriorWrapper extends Attackable {
 	private Warrior warrior;
 	private float stepsInTurn;
 	private boolean hasBuildWall;
@@ -25,7 +25,7 @@ class WarriorWrapper extends Attackable {
 		this.warrior = warrior;
 	}
 
-	Warrior getWarrior() {
+	public Warrior getWarrior() {
 		return warrior;
 	}
 

@@ -2,7 +2,6 @@ package ia.battle.test;
 
 import ia.battle.core.BattleField;
 import ia.battle.core.FieldCell;
-import ia.exceptions.OutOfMapException;
 
 public class TestFieldCell {
 

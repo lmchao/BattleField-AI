@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2015, Ing. Gabriel Barrera <gmbarrera@gmail.com>
+ * Copyright (c) 2012-2017, Ing. Gabriel Barrera <gmbarrera@gmail.com>
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above 
@@ -42,6 +42,10 @@ public final class ConfigurationManager {
 	
 	public int getTurnsToShrink() {
 		return 1000;
+	}
+	
+	public int getShrinkStep() {
+		return 10;
 	}
 	
 	public int getActionsPerTurn() {

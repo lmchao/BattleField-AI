@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2014, Ing. Gabriel Barrera <gmbarrera@gmail.com>
+ * Copyright (c) 2012-2017, Ing. Gabriel Barrera <gmbarrera@gmail.com>
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above 
@@ -16,11 +16,12 @@
 
 package ia.battle.core;
 
+import ia.battle.core.specialitems.SpecialItem;
 
 public class FieldCell extends Attackable {
 	private int x, y;
 	private FieldCellType fieldCellType;
-	private SpecialItem specialItem;
+	private Grabbable specialItem;
 	private float cost;
 	private int hitPoints;
 
@@ -40,17 +41,28 @@ public class FieldCell extends Attackable {
 	void setFieldCellType(FieldCellType fieldCellType) {
 		this.fieldCellType = fieldCellType;
 	}
-	
+
 	void setHitPoints(int hitPoints) {
 		this.hitPoints = hitPoints;
 	}
-	
-	SpecialItem getSpecialItem() {
+
+	Grabbable getSpecialItem() {
 		return specialItem;
 	}
 
 	public boolean hasSpecialItem() {
 		return specialItem != null;
+	}
+
+	Grabbable removeSpecialItem() {
+		Grabbable si = specialItem;
+		specialItem = null;
+
+		return si;
+	}
+
+	void setSpecialItem(Grabbable si) {
+		specialItem = si;
 	}
 
 	public float getCost() {
@@ -81,13 +93,6 @@ public class FieldCell extends Attackable {
 		return aux + " [" + x + ", " + y + "]";
 	}
 
-	SpecialItem removeSpecialItem() {
-		SpecialItem si = specialItem;
-		specialItem = null;
-
-		return si;
-	}
-
 	public boolean equals(Object other) {
 		if (other == null)
 			return false;
@@ -104,11 +109,10 @@ public class FieldCell extends Attackable {
 	@Override
 	void receiveDamage(int damage) {
 		if (this.hitPoints <= damage) {
-			this.hitPoints  = 0;
+			this.hitPoints = 0;
 			this.fieldCellType = FieldCellType.NORMAL;
 			this.cost = 1f;
-		}
-		else
+		} else
 			this.hitPoints -= damage;
 	}
 
@@ -116,10 +120,4 @@ public class FieldCell extends Attackable {
 	public int remainingLive() {
 		return this.hitPoints;
 	}
-
-	void setSpecialItem(SpecialItem si) {
-		specialItem = si;
-	}
-
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2017, Ing. Gabriel Barrera <gmbarrera@gmail.com>
+ * Copyright (c) 2012-2014, Ing. Gabriel Barrera <gmbarrera@gmail.com>
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above 
@@ -14,18 +14,23 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package ia.battle.core;
+package ia.battle.core.specialitems;
 
-public class SpecialItemStealth extends SpecialItem {
+import ia.battle.core.WarriorWrapper;
 
-	SpecialItemStealth(int value) {
-		super(value);
-	}
+public class SpecialItemDefense extends SpecialItem {
+    
+    SpecialItemDefense(int value) {
+        super(value);
+    }
 
-	@Override
-	void affectWarrior(WarriorWrapper warriorWrapper) {
-		
-		
-	}
+    public String toString() {
+        return "D";
+    }
+
+    @Override
+	public void affectWarrior(WarriorWrapper warriorWrapper) {
+    	warriorWrapper.getWarrior().setDefense(warriorWrapper.getWarrior().getDefense() + value);
+    }
 
 }

@@ -17,6 +17,7 @@
 package ia.battle.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ia.battle.core.abilities.Ability;
 import ia.battle.core.actions.Action;
@@ -53,17 +54,17 @@ public abstract class Warrior {
 	public final WarriorManager getWarriorManager() {
 		return this.warriorManager;
 	}
-	
+
 	void setWarriorManager(WarriorManager warriorManager) {
 		this.warriorManager = warriorManager;
 	}
-	
+
 	private FieldCell position;
 
 	public Warrior(String name, int health, int defense, int strength, int speed, int range) throws RuleException {
 
 		this.abilities = new ArrayList<Ability>();
-		
+
 		this.name = name;
 
 		this.health = health;
@@ -79,7 +80,7 @@ public abstract class Warrior {
 		this.initialRange = range;
 
 		int sum = this.health + this.defense + this.strength + this.speed + this.range;
-		
+
 		if (sum > ConfigurationManager.getInstance().getMaxPointsPerWarrior())
 			throw new RuleException();
 
@@ -91,23 +92,23 @@ public abstract class Warrior {
 			this.range = maxRange;
 	}
 
-	final void setHealth(int health) {
+	public final void setHealth(int health) {
 		this.health = health;
 	}
 
-	final void setDefense(int defense) {
+	public final void setDefense(int defense) {
 		this.defense = defense;
 	}
 
-	final void setStrength(int strength) {
+	public final void setStrength(int strength) {
 		this.strength = strength;
 	}
 
-	final void setSpeed(int speed) {
+	public final void setSpeed(int speed) {
 		this.speed = speed;
 	}
 
-	final void setRange(int range) {
+	public final void setRange(int range) {
 		this.range = range;
 	}
 
@@ -147,13 +148,24 @@ public abstract class Warrior {
 	public ArrayList<Ability> getAbilities() {
 		return this.abilities;
 	}
-	
+
+	public void checkAbilities() {
+
+		Iterator<Ability> itr = abilities.iterator();
+		while (itr.hasNext()) {
+			Ability ability = itr.next();
+
+			if (ability.getTurnsToDisable() <= 0)
+				itr.remove();
+		}
+	}
+
 	public abstract Action playTurn(long tick, int actionNumber);
 
 	public abstract void wasAttacked(int damage, FieldCell source);
 
 	public abstract void enemyKilled();
-	
+
 	public abstract void worldChanged(FieldCell oldCell, FieldCell newCell);
 
 	public boolean useSpecialItem() {

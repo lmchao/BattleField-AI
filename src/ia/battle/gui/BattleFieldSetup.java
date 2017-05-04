@@ -17,14 +17,14 @@
 package ia.battle.gui;
 
 import ia.battle.core.BattleField;
-import ia.battle.core.BattleFieldListener;
+import ia.battle.core.GeneralListener;
 import ia.battle.core.FieldCell;
 import ia.battle.core.Warrior;
 import ia.battle.core.WarriorLoader;
 import ia.battle.core.WarriorManager;
 import ia.battle.gui.components.FightButton;
-import ia.battle.sound.DefaultSoundPlayer;
-import ia.battle.sound.SoundPlayer;
+import ia.battle.gui.sound.DefaultSoundPlayer;
+import ia.battle.gui.sound.SoundPlayer;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -59,7 +59,7 @@ public class BattleFieldSetup extends JFrame {
 	private boolean inFight;
 	private SoundPlayer soundPlayer;
 
-	private BattleFieldListener battleFieldListener;
+	private GeneralListener battleFieldListener;
 	
 	public BattleFieldSetup() {
 
@@ -93,7 +93,7 @@ public class BattleFieldSetup extends JFrame {
 
 		soundPlayer = new DefaultSoundPlayer();
 
-		battleFieldListener = new BattleFieldListener() {
+		battleFieldListener = new GeneralListener() {
 
 			@Override
 			public void startFight() {

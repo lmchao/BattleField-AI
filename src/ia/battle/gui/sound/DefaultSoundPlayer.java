@@ -1,4 +1,4 @@
-package ia.battle.sound;
+package ia.battle.gui.sound;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

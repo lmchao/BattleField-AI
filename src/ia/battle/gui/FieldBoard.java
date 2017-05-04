@@ -16,19 +16,17 @@
 
 package ia.battle.gui;
 
-import ia.battle.core.BattleField;
-import ia.battle.core.ConfigurationManager;
-import ia.battle.core.FieldCellType;
-import ia.exceptions.OutOfMapException;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import ia.battle.core.BattleField;
+import ia.battle.core.ConfigurationManager;
+import ia.battle.core.FieldCellType;
 
 public class FieldBoard extends JPanel {
 

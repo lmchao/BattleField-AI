@@ -19,19 +19,63 @@ package ia.battle.core.abilities;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ia.battle.core.BattleField;
+import ia.battle.core.Grabbable;
+import ia.battle.core.TimerListener;
 import ia.battle.core.Warrior;
 
-public abstract class Ability {
+public abstract class Ability implements Grabbable {
+	private int turnsToDisable = 100;
+	private boolean isActive;
 
-	public static StealthAbility getStealthAbility(Warrior enemyWarrior) {
-		
-		List<Ability> ab = enemyWarrior.getAbilities().stream().filter(u -> u instanceof StealthAbility).collect(Collectors.toList());
+	public Ability() {
+
+		BattleField.getInstance().addListener(new TimerListener() {
+
+			@Override
+			public void turnLapsed(long tick, int turnNumber, Warrior warrior) {
+				if (isActive) {
+					turnsToDisable--;
+					if (turnsToDisable <= 0) {
+						isActive = false;
+					}
+				}
+			}
+
+			@Override
+			public void tickLapsed(long tick) {
+			}
+		});
+	}
+
+	public int getTurnsToDisable() {
+		return this.turnsToDisable;
+	}
+
+	public final void activate() {
+		isActive = (turnsToDisable > 0);
+	}
+
+	public final void deactivate() {
+		isActive = false;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	/**
+	 * Return the first Stealth Ability collected
+	 * @param warrior
+	 * @return
+	 */
+	public static StealthAbility getStealthAbility(Warrior warrior) {
+
+		List<Ability> ab = warrior.getAbilities().stream().filter(u -> u instanceof StealthAbility)
+				.collect(Collectors.toList());
 		if (ab.size() > 0)
-			return (StealthAbility)ab.get(0);
-		
+			return (StealthAbility) ab.get(0);
+
 		return null;
 	}
-	
-	
-	
 }

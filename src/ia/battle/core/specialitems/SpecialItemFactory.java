@@ -14,7 +14,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package ia.battle.core;
+package ia.battle.core.specialitems;
 
 import java.util.Random;
 
@@ -29,10 +29,10 @@ import java.util.Random;
  ataque      20      20
  */
 
-class SpecialItemFactory {
+public class SpecialItemFactory {
     private Random rnd = new Random();
 
-    SpecialItem getSpecialItem() {  
+    public SpecialItem getSpecialItem() {  
         SpecialItem si;
 
         int i = rnd.nextInt(5);

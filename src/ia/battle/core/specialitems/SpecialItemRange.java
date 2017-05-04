@@ -14,16 +14,24 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package ia.battle.core;
+package ia.battle.core.specialitems;
 
+import ia.battle.core.WarriorWrapper;
 
-public abstract class SpecialItem {
-    int value;
-    
-    SpecialItem(int value) {
-        this.value = value;
+public class SpecialItemRange extends SpecialItem {
+
+    SpecialItemRange(int value) {
+        super(value);
     }
-    
-    abstract void affectWarrior(WarriorWrapper warriorWrapper);
+
+    public String toString() {
+        return "R";
+    }
+
+    @Override
+	public void affectWarrior(WarriorWrapper warriorWrapper) {
+    	warriorWrapper.getWarrior().setRange(warriorWrapper.getWarrior().getRange() + value);
+        
+    }
 
 }

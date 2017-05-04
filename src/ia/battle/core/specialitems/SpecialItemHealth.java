@@ -14,22 +14,23 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package ia.battle.core;
+package ia.battle.core.specialitems;
 
+import ia.battle.core.WarriorWrapper;
 
-public class SpecialItemSpeed extends SpecialItem {
+public class SpecialItemHealth extends SpecialItem {
 
-    SpecialItemSpeed(int value) {
-        super(value);
-    }
+	public SpecialItemHealth(int value) {
+		super(value);
+	}
 
-    public String toString() {
-        return "S";
-    }
+	public String toString() {
+		return "H";
+	}
 
-    @Override
-    void affectWarrior(WarriorWrapper warriorWrapper) {
-    	warriorWrapper.getWarrior().setSpeed(warriorWrapper.getWarrior().getSpeed() + value);
-    }
+	public void affectWarrior(WarriorWrapper warriorWrapper) {
 
+		warriorWrapper.getWarrior().setHealth(warriorWrapper.getWarrior().getHealth() + value);
+
+	}
 }
