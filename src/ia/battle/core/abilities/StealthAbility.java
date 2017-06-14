@@ -21,11 +21,13 @@ import ia.battle.core.FieldCell;
 public class StealthAbility extends Ability {
 	private FieldCell currentPosition;
 	
-	public StealthAbility(FieldCell currentPosition) {
-		this.currentPosition = currentPosition;
+	public StealthAbility() {
+		System.out.println("STEALTH ABILITY CREATED!!");
 	}
 	
 	public FieldCell getStealthPosition() {
 		return currentPosition;
 	}
+	
+	
 }

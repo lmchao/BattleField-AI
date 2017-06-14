@@ -145,7 +145,7 @@ public class FieldBoard extends JPanel {
                                 this);
                     } else {
                         
-                        if (battleField.getFieldCell(i, j).hasSpecialItem())
+                        if (battleField.getFieldCell(i, j).hasItem())
                             g.drawImage(box, i * cellWidth + offset_x, j * cellHeight + offset_y, cellWidth,
                                     cellHeight, this);
                     }

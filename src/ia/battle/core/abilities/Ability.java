@@ -25,7 +25,7 @@ import ia.battle.core.TimerListener;
 import ia.battle.core.Warrior;
 
 public abstract class Ability implements Grabbable {
-	private int turnsToDisable = 100;
+	private int turnsToDisable = 20;
 	private boolean isActive;
 
 	public Ability() {
@@ -52,8 +52,9 @@ public abstract class Ability implements Grabbable {
 		return this.turnsToDisable;
 	}
 
-	public final void activate() {
+	public final boolean activate() {
 		isActive = (turnsToDisable > 0);
+		return isActive;
 	}
 
 	public final void deactivate() {

@@ -16,20 +16,18 @@
 
 package ia.battle.core;
 
-import ia.battle.core.specialitems.SpecialItem;
-
 public class FieldCell extends Attackable {
 	private int x, y;
 	private FieldCellType fieldCellType;
-	private Grabbable specialItem;
+	private Grabbable grabbableItem;
 	private float cost;
 	private int hitPoints;
 
-	FieldCell(FieldCellType type, int x, int y, SpecialItem specialItem, float cost) {
+	FieldCell(FieldCellType type, int x, int y, Grabbable grabbableItem, float cost) {
 		this.fieldCellType = type;
 		this.x = x;
 		this.y = y;
-		this.specialItem = specialItem;
+		this.grabbableItem = grabbableItem;
 		this.cost = cost;
 		this.hitPoints = ConfigurationManager.getInstance().getFieldCellHitPoints();
 	}
@@ -46,23 +44,23 @@ public class FieldCell extends Attackable {
 		this.hitPoints = hitPoints;
 	}
 
-	Grabbable getSpecialItem() {
-		return specialItem;
+	Grabbable getItem() {
+		return grabbableItem;
 	}
 
-	public boolean hasSpecialItem() {
-		return specialItem != null;
+	public boolean hasItem() {
+		return grabbableItem != null;
 	}
 
-	Grabbable removeSpecialItem() {
-		Grabbable si = specialItem;
-		specialItem = null;
+	Grabbable removeItem() {
+		Grabbable si = grabbableItem;
+		grabbableItem = null;
 
 		return si;
 	}
 
-	void setSpecialItem(Grabbable si) {
-		specialItem = si;
+	void setItem(Grabbable si) {
+		grabbableItem = si;
 	}
 
 	public float getCost() {

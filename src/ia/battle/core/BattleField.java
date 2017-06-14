@@ -99,9 +99,17 @@ public class BattleField {
 
 					if (maze[i][j] == 2) // Swamp
 						cost = 1.5f;
-
-					cells[i][j] = new FieldCell(FieldCellType.NORMAL, i, j,
-							Math.abs(random.nextGaussian()) > 2.5f ? specialItemFactory.getSpecialItem() : null, cost);
+					
+					double chance = Math.abs(random.nextGaussian());
+					
+					Grabbable g = null;
+					if (chance > 3.2)
+						g = new StealthAbility();
+					else if (chance > 2.5)
+						g = specialItemFactory.getSpecialItem();
+					
+					cells[i][j] = new FieldCell(FieldCellType.NORMAL, i, j, g, cost);
+					
 				}
 			}
 	}
@@ -235,7 +243,7 @@ public class BattleField {
 
 		for (int i = 0; i < configurationManager.getMapWidth(); i++)
 			for (int j = 0; j < configurationManager.getMapHeight(); j++)
-				if (cells[i][j].getSpecialItem() != null && isPositionInRange(cells[i][j])) {
+				if (cells[i][j].getItem() != null && isPositionInRange(cells[i][j])) {
 
 					items.add(cells[i][j]);
 				}
@@ -585,7 +593,7 @@ public class BattleField {
 
 	private void addNewSpecialItem() {
 		FieldCell cell = getFieldCell(FieldCellType.NORMAL);
-		cell.setSpecialItem(specialItemFactory.getSpecialItem());
+		cell.setItem(specialItemFactory.getSpecialItem());
 	}
 
 	// private void changeWorld() {
@@ -647,21 +655,21 @@ public class BattleField {
 			if (fc.getFieldCellType() == FieldCellType.BLOCKED) {
 				fc.receiveDamage(fc.remainingLive());
 			}
-			fc.removeSpecialItem();
+			fc.removeItem();
 		}
 
 		for (FieldCell fc : middleAdjs) {
 			if (fc.getFieldCellType() == FieldCellType.BLOCKED) {
 				fc.receiveDamage(fc.remainingLive());
 			}
-			fc.removeSpecialItem();
+			fc.removeItem();
 		}
 
 		for (FieldCell fc : outterAdjs) {
 			if (fc.getFieldCellType() == FieldCellType.BLOCKED) {
 				fc.receiveDamage(fc.remainingLive());
 			}
-			fc.removeSpecialItem();
+			fc.removeItem();
 		}
 
 		// Damage enemy warrior
@@ -851,18 +859,18 @@ public class BattleField {
 
 				previousCell = fieldCell;
 
-				if (fieldCell.getSpecialItem() != null) {
+				if (fieldCell.getItem() != null) {
 					
-					if (fieldCell.getSpecialItem() instanceof SpecialItem) {
+					if (fieldCell.getItem() instanceof SpecialItem) {
 					
 						if (currentWarriorWrapper.getWarrior().useSpecialItem()) {
-							SpecialItem si = (SpecialItem) fieldCell.removeSpecialItem();
+							SpecialItem si = (SpecialItem) fieldCell.removeItem();
 							si.affectWarrior(currentWarriorWrapper);
 						}
 						
-					} else if (fieldCell.getSpecialItem() instanceof Ability) {
+					} else if (fieldCell.getItem() instanceof Ability) {
 						
-						currentWarriorWrapper.getWarrior().getAbilities().add((Ability)fieldCell.getSpecialItem());
+						currentWarriorWrapper.getWarrior().getAbilities().add((Ability)fieldCell.getItem());
 						
 					}
 				}
