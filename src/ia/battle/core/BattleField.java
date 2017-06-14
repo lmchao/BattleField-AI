@@ -103,9 +103,10 @@ public class BattleField {
 					double chance = Math.abs(random.nextGaussian());
 					
 					Grabbable g = null;
-					if (chance > 3.2)
-						g = new StealthAbility();
-					else if (chance > 2.5)
+//					if (chance > 3.2)
+//						g = new StealthAbility();
+//					else
+						if (chance > 2.5)
 						g = specialItemFactory.getSpecialItem();
 					
 					cells[i][j] = new FieldCell(FieldCellType.NORMAL, i, j, g, cost);
@@ -114,6 +115,9 @@ public class BattleField {
 			}
 	}
 
+	/**
+	 * Don't Use HasItem(), instead use getSpecialItems() method
+	 */
 	public FieldCell getFieldCell(int x, int y) { // throws OutOfMapException {
 
 		// if ((x >= cells.length) || (x < 0) || (y >= cells[0].length) || (y <
@@ -139,9 +143,9 @@ public class BattleField {
 
 		FieldCell position = enemyWarrior.getPosition();
 
-		StealthAbility ab = Ability.getStealthAbility(enemyWarrior);
-		if (ab != null)
-			position = ab.getStealthPosition();
+//		StealthAbility ab = Ability.getStealthAbility(enemyWarrior);
+//		if (ab != null)
+//			position = ab.getStealthPosition();
 
 		enemyData = new WarriorData(position, enemyWarrior.getHealth(), enemyWarrior.getName(),
 				isWarriorInRange(enemyWarrior), enemyWarrior.getWarriorManager().getCount());
@@ -376,18 +380,27 @@ public class BattleField {
 					Future<Action> future = executor.submit(new PlayTurnExecutor(currentWarriorWrapper, tick, i));
 
 					try {
-						currentWarriorAction = future.get(2, TimeUnit.SECONDS);
+						currentWarriorAction = future.get(2, TimeUnit.SECONDS);						
 					} catch (InterruptedException | ExecutionException | TimeoutException e) {
 						future.cancel(true);
+						System.err.println(e);
 						currentWarriorWrapper.receiveDamage(1000);
 						System.out.println("KILLED FOR TIMEOUT");
 						break;
 					}
 
 					executor.shutdownNow();
-
+					
+					
+					
 					if (currentWarriorAction instanceof Move) {
+					
+						System.err.println("\t" +  currentWarriorWrapper.getWarrior().getName() + "\t" +
+								((Move)currentWarriorAction).move() + "\t" +
+								currentWarriorAction.getClass().getName() + "\t" + currentWarriorWrapper.getWarrior().getSpeed());
+						
 						executeMoveAction((Move) currentWarriorAction);
+						
 					} else if (currentWarriorAction instanceof Attack) {
 						executeAttackAction((Attack) currentWarriorAction);
 					} else if (currentWarriorAction instanceof Skip) {
@@ -870,7 +883,7 @@ public class BattleField {
 						
 					} else if (fieldCell.getItem() instanceof Ability) {
 						
-						currentWarriorWrapper.getWarrior().getAbilities().add((Ability)fieldCell.getItem());
+						//currentWarriorWrapper.getWarrior().getAbilities().add((Ability)fieldCell.getItem());
 						
 					}
 				}

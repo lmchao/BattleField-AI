@@ -1,4 +1,4 @@
-file:/C:/Users/Gabriel/Documents/Anon.jar
-Coach
-file:/C:/Users/Gabriel/Documents/FluxCap1.jar
-CondensadorSINLOG
+file:/C:/Users/Gabriel/Documents/AlanWarrior.jar
+Warrior.MyWarriorManager
+file:/C:/Users/Gabriel/Documents/FluxCap3.jar
+CondensadorDeFlujo
