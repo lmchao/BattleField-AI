@@ -1,4 +1,4 @@
-file:/C:/Users/Gabriel/Documents/AlanWarrior.jar
-Warrior.MyWarriorManager
-file:/C:/Users/Gabriel/Documents/FluxCap3.jar
-CondensadorDeFlujo
+file:/C:/Users/lchao/Desktop/Klingon.jar
+ia.battle.bot.Trainer
+file:/C:/Users/lchao/Desktop/ElEntrenador.jar
+ElEntrenador

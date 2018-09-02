@@ -47,6 +47,8 @@ import ia.exceptions.RuleException;
 //TODO: Cambio de warriors
 
 public class BattleField {
+	
+	private static final int TURN_TIMEOUT_SECS = Integer.MAX_VALUE;
 
 	private ArrayList<GeneralListener> listeners;
 	private ArrayList<TimerListener> timerListeners;
@@ -380,7 +382,7 @@ public class BattleField {
 					Future<Action> future = executor.submit(new PlayTurnExecutor(currentWarriorWrapper, tick, i));
 
 					try {
-						currentWarriorAction = future.get(2, TimeUnit.SECONDS);						
+						currentWarriorAction = future.get(TURN_TIMEOUT_SECS, TimeUnit.SECONDS);						
 					} catch (InterruptedException | ExecutionException | TimeoutException e) {
 						future.cancel(true);
 						System.err.println(e);
