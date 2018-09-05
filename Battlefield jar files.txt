@@ -1,4 +1,0 @@
-file:/C:/Users/lchao/Desktop/Klingon.jar
-ia.battle.bot.Trainer
-file:/C:/Users/lchao/Desktop/ElEntrenador.jar
-ElEntrenador
