@@ -48,7 +48,7 @@ import ia.exceptions.RuleException;
 
 public class BattleField {
 	
-	private static final int TURN_TIMEOUT_SECS = Integer.MAX_VALUE;
+	private static final int TURN_TIMEOUT_SECS = 2;
 
 	private ArrayList<GeneralListener> listeners;
 	private ArrayList<TimerListener> timerListeners;
@@ -80,6 +80,10 @@ public class BattleField {
 	}
 
 	public static BattleField getInstance() {
+		return instance;
+	}
+	public static BattleField getNewInstance() {
+		instance = new BattleField();
 		return instance;
 	}
 

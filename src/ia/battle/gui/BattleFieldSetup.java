@@ -207,6 +207,8 @@ public class BattleFieldSetup extends JFrame {
 
 	protected void figthClicked() {
 
+		BattleField.getNewInstance();
+		
 		saveJarSelection();
 
 		WarriorLoader warriorLoader = new WarriorLoader();
